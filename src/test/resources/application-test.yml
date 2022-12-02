@@ -1,0 +1,3 @@
+card-service:
+  api:
+    key: TEST_API_KEY

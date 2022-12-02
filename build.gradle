@@ -1,0 +1,61 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("io.micronaut.application") version "1.5.3"
+}
+
+version = "0.1"
+group = "com.leolebleis.card"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.leolebleis.card.*")
+    }
+}
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.18'
+    annotationProcessor("org.projectlombok:lombok")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-runtime")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("javax.annotation:javax.annotation-api")
+    compileOnly("org.projectlombok:lombok")
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.slf4j:slf4j-simple")
+    implementation("io.micronaut:micronaut-validation")
+    testImplementation("org.mockito:mockito-core")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+
+    // Braintree Java SDK
+    implementation("com.braintreepayments.gateway:braintree-java:2.65.0")
+
+    // Swagger OpenAPI plugin
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi:1.1.1")
+    implementation("io.swagger.core.v3:swagger-annotations")
+}
+
+task stage {
+    dependsOn "build"
+    dependsOn "clean"
+    build.mustRunAfter "clean"
+}
+
+application {
+    mainClass.set("com.leolebleis.card.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("14")
+    targetCompatibility = JavaVersion.toVersion("14")
+}
+
+
+

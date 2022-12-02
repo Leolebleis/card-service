@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.leolebleis
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, gradle, http-client, java, java-application, jdbc-hikari, junit, lombok, mockito, netty-server, postgres, readme, shade, slf4j-simple, testcontainers, yaml]

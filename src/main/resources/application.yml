@@ -1,0 +1,39 @@
+micronaut:
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+  application:
+    name: cardService
+
+card-service:
+  api:
+    key: ${API_KEY:36e0c314-beea-44bf-b737-d255d1f46932}
+    defaultProvider: STRIPE # BRAINTREE
+
+datasources:
+  default:
+    url: ${JDBC_DATABASE_URL:`jdbc:postgresql://localhost:5432/postgres`}
+    driverClassName: org.postgresql.Driver
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:password}
+
+braintree:
+  api:
+    merchantId: ${BRAINTREE_MERCHANT_ID:y7qk66zt4p6hprnm}
+    publicKey: ${BRAINTREE_PUBLIC_KEY:qpfvfk2k2m4z44b3}
+    privateKey: ${BRAINTREE_PRIVATE_KEY:6a053e9cccfaccaa9b4ea7de292c3116}
+
+stripe:
+  api:
+    secret: Bearer ${STRIPE_API_KEY:rk_test_51J0kXcIXQ3bUyuVlj0cEnoBsiqgHRNeFtQEElxZvtTa0jPRswp4pkOpQ3BeOTp5372ri5K7L8bdXTOCLAKiUxn6C00mfoYBUFA}
+    url: https://api.stripe.com
+    version: v1
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+      locations: classpath:/db/migration
+      schemas: ${JDBC_DATABASE_USERNAME:postgres}
